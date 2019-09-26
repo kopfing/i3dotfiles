@@ -63,6 +63,7 @@ precmd_functions+=(_fix_cursor)
 #     fi
 # }
 # bindkey -s '^o' 'lfcd\n'
+#
 # Use ranger to do that
 rangercd () {
     ranger --choosedir=$HOME/.cache/ranger/rangerdir
