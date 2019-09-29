@@ -1,0 +1,62 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = false
+        interval = 5
+        markup = pango
+}
+
+order += "volume master"
+order += "cpu_usage"
+#order += "disk /"
+#order += "disk /home"
+order += "wireless _first_"
+order += "battery all"
+order += "tztime local"
+
+wireless _first_ {
+        format_down = ""
+        format_up = "<span background='#6c71c4'>  </span><span background='#fdf6e3'> %quality </span>"
+}
+
+battery all {
+        last_full_capacity = true
+        hide_seconds = true
+        integer_battery_capacity = true
+        format = "<span background='#d33682'> %status </span><span background='#fdf6e3'> %percentage %remaining </span>"
+        status_bat = ""
+        status_unk = ""
+        status_full = ""
+        status_chr = ""
+}
+
+tztime local {
+        format = "<span background='#2aa198'>  </span><span background='#fdf6e3'> %time </span>"
+        format_time = "%a %-d %b %H:%M"
+}
+
+cpu_usage {
+        format = "<span background='#cb4b16'>  </span><span background='#fdf6e3'> %usage </span>"
+}
+
+disk "/" {
+        format = "<span background='#268bd2'>  </span><span background='#fdf6e3'> %avail </span>"
+}
+
+volume master {
+        format = "<span background='#268bd2'>  </span><span background='#fdf6e3'> %volume </span>"
+        format_muted = "<span background='#dc322f'>  </span><span background='#fdf6e3'> 0%% </span>"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+ } 
+
+disk "/home" {
+        format = "<span background='#d33682'>  </span><span background='#fdf6e3'> %avail </span>"
+}

@@ -35,8 +35,5 @@ if [ "$(tty)" = "/dev/tty1" ]; then
 	pgrep -x i3 || exec startx
 fi
 
-# set x keyboardlayout
-setxkbmap us altgr-intl
-
 # Switch escape and caps if tty:
 sudo -n loadkeys ~/.scripts/ttymaps.kmap 2>/dev/null

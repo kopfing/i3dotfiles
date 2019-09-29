@@ -1,0 +1,50 @@
+mpd_host =  192.168.1.104
+#mpd_host = "/home/me/.config/mpd/socket"
+mpd_port = 6600
+#mpd_music_dir = ~/piShare/Ext/Musik
+#visualizer_fifo_path = /home/me/.config/mpd/visual.fifo
+#visualizer_output_name = visual
+#visualizer_in_stereo = no
+#visualizer_sync_interval = 30
+###############################################################
+#
+#
+colors_enabled                  = "yes"
+song_status_format              = "$0{$8%t$9} on {$5%b$9} by {$3%a}" 
+song_columns_list_format        = "(20)[green]{a} (6f)[cyan]{NE} (35)[white]{t|f:Title} (20)[cyan]{b} (7f)[white]{l} (6f)[cyan]{y} (10)[cyan]{g}
+now_playing_prefix              = "$b$8> $9"
+now_playing_suffix              = "$/b"
+#progressbar_look                = "▃▃ "
+#progressbar_look                = "── "
+progressbar_look = "─╼─"
+
+user_interface = "classic"
+playlist_separate_albums = "no"
+playlist_display_mode = "columns" (classic/columns)
+#header_visibility = "no"
+#titles_visibility = "no"
+statusbar_visibility = "yes"
+autocenter_mode = "no"
+centered_cursor = "yes"
+mouse_support = "yes"
+discard_colors_if_item_is_selected = "yes"
+
+enable_window_title = "yes"
+
+visualizer_type = spectrum
+
+system_encoding = "utf-8"
+
+browser_display_mode = "columns"
+data_fetching_delay = "yes"
+media_library_primary_tag = "album_artist"
+default_find_mode = "wrapped"
+header_text_scrolling = "yes"
+#cyclic_scrolling = "yes"
+ask_before_clearing_playlists = "yes"
+clock_display_seconds = "yes"
+display_volume_level = "yes"
+display_bitrate = "yes"
+ignore_leading_the = "no"
+#use_console_editor = "yes"
+

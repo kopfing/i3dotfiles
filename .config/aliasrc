@@ -1,0 +1,11 @@
+
+alias progs="(pacman -Qet && pacman -Qm) | sort -u" # List programs I've installed
+alias orphans="pacman -Qdt" # List orphan programs
+alias ll='ls -lh --color=auto'
+alias la='ls -alh --color=auto'
+alias SS="sudo systemctl"
+alias mkd="mkdir -pv"
+alias ls='ls -hN --color=auto --group-directories-first'
+alias grep="grep --color=auto" # Color grep - highlight desired sequence.
+alias ccat="highlight --out-format=ansi" # Color cat - print file with syntax highlighting.
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

@@ -10,8 +10,10 @@ SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 
 # Basic auto/tab complete:
-autoload -U compinit
+autoload -Uz compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*:*:git:*' script ~/.config/zsh/git-completion.bash
+fpath=(~/.config/zsh $fpath)
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
