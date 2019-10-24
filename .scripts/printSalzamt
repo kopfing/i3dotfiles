@@ -2,3 +2,4 @@ lpoptions -d Canon_MG4200_series
 lpr U6-18.pdf
 ### 2 Seiten pro Blatt und nur Seiten 1 - 12
 lpr -o number-up=2 -o page-ranges=1-12 Formelheft_Haxha.pdf
+schwarzweiss und A4 lpr -o PageSize=A4 -o ColorModel=Gray Antrag\ Leistungsstipendium_2018\ 19_matthiasmoser.pdf

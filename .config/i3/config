@@ -12,7 +12,7 @@
 # Needed for i3-gaps
 for_window [class="^.*"] border none
 gaps inner 15
-gaps outer 5
+gaps outer 3
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $alt Mod1
@@ -50,6 +50,8 @@ exec --no-startup-id nm-applet
 exec_always --no-startup-id xrdb ~/.Xresources
 # battery notifications
 exec --no-startup-id i3-battery-popup -L 30 -n
+# start udiskie for automount usb devices
+exec --no-startup-id udiskie
 
 # Set Xresources colors:
 set_from_resource $color0	color7  #000000
