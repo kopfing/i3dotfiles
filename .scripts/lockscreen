@@ -13,7 +13,7 @@ mocp -P &>/dev/null
 mpc pause &>/dev/null
 pauseallmpv &>/dev/null
 
-i3lock -e -f -c 000000 -i /tmp/locked.png
+i3lock -e -f -c 000000 -i /tmp/locked.png --insidewrongcolor=cc241dff --insidevercolor=b16282ff --ringvercolor=b16282ff --ringwrongcolor=cc241dff --keyhlcolor=fabd2fff --bshlcolor=cc241dff --ringcolor=928374ff
 
 # In five seconds, turn off display unless key press in last 4 seconds.
 sleep 5 && [[ 4000 -lt $(xssstate -i) ]] &&  pgrep -x i3lock && xset dpms force off

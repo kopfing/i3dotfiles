@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'takac/vim-hardtime'
     Plug 'lilydjwg/colorizer'
     Plug 'neovimhaskell/haskell-vim'
+    Plug 'morhetz/gruvbox'
 call plug#end()
 
 
@@ -63,19 +64,6 @@ set number relativenumber  " set hybrid line numbers
 "let g:hardtime_default_on = 1 " Stop repeating jjjjjj
 set encoding=utf-8
 set fileencoding=utf-8
-
-set background=dark
-colorscheme solarized
-let g:airline_solarized_dark_text = 1
-let g:airline_theme='solarized'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = 1
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.maxlinenr = ''
 
 let g:ycm_filetype_blacklist = {} " YouCompleteMe in allen Dateien nutzen
 
@@ -151,3 +139,5 @@ nnoremap <Leader>p :!pandoc -t latex -o output.pdf % --include-in-header ~/.vim/
 map <leader>c :w! \| !compiler <c-r>%<CR>
 " Compile Haskell
 nnoremap <Leader>h :!ghc -dynamic %<CR>
+
+so ~/.config/vim/colorgruvbox

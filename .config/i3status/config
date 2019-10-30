@@ -22,14 +22,14 @@ order += "tztime local"
 
 wireless _first_ {
         format_down = ""
-        format_up = "<span background='#6c71c4'>  </span><span background='#fdf6e3'> %quality </span>"
+        format_up = "<span background='#b16286'>  </span><span background='#ebdbb2'> %quality </span>"
 }
 
 battery all {
         last_full_capacity = true
         hide_seconds = true
         integer_battery_capacity = true
-        format = "<span background='#d33682'> %status </span><span background='#fdf6e3'> %percentage %remaining </span>"
+        format = "<span background='#fabd2f'> %status </span><span background='#ebdbb2'> %percentage %remaining </span>"
         status_bat = ""
         status_unk = ""
         status_full = ""
@@ -37,26 +37,26 @@ battery all {
 }
 
 tztime local {
-        format = "<span background='#2aa198'>  </span><span background='#fdf6e3'> %time </span>"
+        format = "<span background='#a89984'>  </span><span background='#ebdbb2'> %time </span>"
         format_time = "%a %-d %b %H:%M"
 }
 
 cpu_usage {
-        format = "<span background='#cb4b16'>  </span><span background='#fdf6e3'> %usage </span>"
+        format = "<span background='#d79921'>  </span><span background='#ebdbb2'> %usage </span>"
 }
 
 disk "/" {
-        format = "<span background='#268bd2'>  </span><span background='#fdf6e3'> %avail </span>"
+        format = "<span background='#458588'>  </span><span background='#ebdbb2'> %avail </span>"
 }
 
 volume master {
-        format = "<span background='#268bd2'>  </span><span background='#fdf6e3'> %volume </span>"
-        format_muted = "<span background='#dc322f'>  </span><span background='#fdf6e3'> 0%% </span>"
+        format = "<span background='#458588'>  </span><span background='#ebdbb2'> %volume </span>"
+        format_muted = "<span background='#fb4934'>  </span><span background='#ebdbb2'> 0%% </span>"
         device = "default"
         mixer = "Master"
         mixer_idx = 0
  } 
 
 disk "/home" {
-        format = "<span background='#d33682'>  </span><span background='#fdf6e3'> %avail </span>"
+        format = "<span background='#ebdbb2'>  </span><span background='#ebdbb2'> %avail </span>"
 }
