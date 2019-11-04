@@ -200,7 +200,7 @@ bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id botto
 bindsym $mod+n			exec $term -e newspod
 ##bindsym $mod+Shift+n
 
-bindsym $mod+m 			exec --no-startup-id $term -e ncmpcpp
+bindsym $mod+m 			exec --no-startup-id $term -e ncmpcpp; gaps inner current set 15; gaps outer current set 90
 bindsym $mod+Shift+m		exec --no-startup-id lmc mute
 
 # #---Workspace Bindings---# #
@@ -227,7 +227,7 @@ set $ws1 "1:"
 set $ws2 "2:"
 set $ws3 "3:"
 set $ws4 "4:"
-set $ws5 "5"
+set $ws5 "5:"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
