@@ -6,7 +6,7 @@
 
 ! URxvt*font:				xft:monospace:size=12
 ! URxvt*font:				xft:Liberation Mono for powerline:size=11
-URxvt*font:				xft:Roboto Mono for powerline:size=11
+*font:				xft:Roboto Mono for powerline:size=11
 ! URxvt*font:				xft:DejaVu Sans Mono for powerline:size=11
 
 
