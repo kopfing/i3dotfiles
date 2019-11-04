@@ -28,9 +28,10 @@ syntax enable
 filetype indent on
 au FocusLost * :wa      " autosave on losing focus (does this work)
 set hidden              " allows us to edit multiple buffers
+set title               " set teriminal title
 set visualbell
 "set showmatch           " show matching bracket for short time
-set ttyfast
+set ttyfast             " faster redrawing
 set undofile
 set cursorline          " highlight current line
 set tabstop=4
@@ -40,6 +41,8 @@ set smartindent
 set autoindent
 set expandtab           " spaces instead of real tabs
 set scrolloff=7
+set wrap                " display long lines as multiple lines
+set linebreak           " soft wrapping - break line at breakpoint
 set foldenable			" enable folding
 set foldlevelstart=99	" open folds when opening a buffer
 set foldmethod=syntax
@@ -111,13 +114,6 @@ set smartcase
 nnoremap / /\v
 vnoremap / /\v
 "
-" etc
-" - clear search highlights with esc
-nnoremap <Enter> :noh<CR>
-" - remap snipMate key (Tab already used by ycm)
-imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
-"
 " - map spellchecking to F6
 let g:myLang = 0
 let g:myLangList = ['nospell', 'de_de', 'en_us']
@@ -134,8 +130,18 @@ endfunction
 map <F6> :<C-U>call MySpellLang()<CR>
 "map <F6> :setlocal spell! spelllang=en_us<CR>
 "
+" - scroll the viewport faster
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+" etc
+" - clear search highlights with Return
+nnoremap <Enter> :noh<CR>
+" - remap snipMate key (Tab already used by ycm)
+imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+"
 " Build Markdown
-nnoremap <Leader>p :!pandoc -t latex -o output.pdf % --include-in-header ~/.vim/mdheader.tex<CR>
+nnoremap <Leader>p :!pandoc -t latex -V papersize:a4 -o output.pdf % --include-in-header ~/.vim/mdheader.tex<CR>
 map <leader>c :w! \| !compiler <c-r>%<CR>
 " Compile Haskell
 nnoremap <Leader>h :!ghc -dynamic %<CR>
