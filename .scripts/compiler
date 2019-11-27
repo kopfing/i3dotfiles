@@ -29,7 +29,7 @@ textype() { \
 case "$file" in
 	*\.rmd) echo "require(rmarkdown); render('$file')" | R --vanilla ;;
 	*\.tex) textype "$file" ;;
-	*\.md) pandoc "$file" --pdf-engine=xelatex -o "$base".pdf ;;
+	*\.md) pandoc "$file" --pdf-engine=xelatex -V papersize:a4 -o "$base".pdf ;;
 	*config.h) make && sudo make install ;;
 	*) sent "$file" 2>/dev/null & ;;
 esac
