@@ -40,7 +40,7 @@ set shiftwidth=4
 set smartindent
 set autoindent
 set expandtab           " spaces instead of real tabs
-set scrolloff=7
+set scrolloff=4
 set wrap                " display long lines as multiple lines
 set linebreak           " soft wrapping - break line at breakpoint
 set foldenable			" enable folding
