@@ -25,8 +25,6 @@ export LESS_TERMCAP_ZV=$(tput rsubm)
 export LESS_TERMCAP_ZO=$(tput ssupm)
 export LESS_TERMCAP_ZW=$(tput rsupm)
 
-[ -f ~/.scripts/shortcuts.sh ] && ~/.scripts/shortcuts.sh
-
 [ -f ~/.bashrc ] && source ~/.bashrc
 [ -f ~/.zshrc ] && source ~/.zshrc
 
