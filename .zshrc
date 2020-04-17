@@ -4,6 +4,8 @@
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%1~%{$fg[red]%}]%{$reset_color%}$%b "
 
+# export CATALINA_HOME=/home/me/IdeaProjects/apache-tomcat-9.0.33
+
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000

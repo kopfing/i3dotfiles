@@ -10,6 +10,7 @@ case "$1" in
 	"down") pamixer --allow-boost -d "$2" ; $newvol ;;
 	"mute") pamixer --allow-boost -t ; $newvol ;;
 	"truemute") pamixer --allow-boost -m ; $newvol ;;
+    "micmute") pamixer --source 1 -t ;;
 	"toggle") mpc toggle ;;
 	"pause") mpc pause ; pauseallmpv ;;
 	"forward") mpc seek +"$2" ;;
