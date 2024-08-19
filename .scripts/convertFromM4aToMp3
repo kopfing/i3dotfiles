@@ -1,0 +1,4 @@
+#!/bin/bash
+for i in *.m4a; do
+    ffmpeg -v 5 -y -i "$i" -acodec libmp3lame -ac 2 -ab 256k "$(basename "${i/.m4a}").mp3"
+done

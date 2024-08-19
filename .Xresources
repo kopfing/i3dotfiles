@@ -1,0 +1,91 @@
+#include "/home/me/.config/xresources/gruvbox"
+
+! ------------------------------------------------------------------------------
+! Font configuration
+! ------------------------------------------------------------------------------
+
+*font:				xft:Roboto Mono for powerline:size=12
+!*font:				xft:SauceCodePro Nerd Font Mono:size=13:semibold
+!*font:				xft:RobotoMono Nerd Font Mono:size=12
+
+
+! ------------------------------------------------------------------------------
+! Xft Font Configuration
+! ------------------------------------------------------------------------------
+
+Xft.dpi: 138
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+! ------------------------------------------------------------------------------
+! URxvt configs
+! ------------------------------------------------------------------------------
+
+! font spacing
+URxvt*letterSpace:		1
+URxvt.lineSpace:		1
+
+! general settings
+URxvt*saveline:			15000
+! URxvt*termName:			rxvt-256color
+URxvt*iso14755:			false
+URxvt*urgentOnBell:		true
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+! appearance
+! URxvt*depth:			24
+URxvt*scrollBar:		false
+URxvt*scrollBar_right:	false
+URxvt*internalBorder:	30
+URxvt*externalBorder:	0
+URxvt.geometry:			84x22
+!URxvt*transparent:      true
+!URxvt*shading:          20
+
+! perl extensions
+URxvt.perl-ext:	default,url-select,keyboard-select,resize-font
+
+URxvt.keysym.M-Escape:	perl:keyboard-select:activate
+URxvt.keysym.M-s:		perl:keyboard-select:search
+URxvt.keysym.M-u:		perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline:	true
+
+! scroll one line
+URxvt.keysym.Shift-Up:		command:\033]720;1\007
+URxvt.keysym.Shift-Down:	command:\033]721;1\007
+
+! control arrow
+URxvt.keysym.Control-Up:	\033[1;5A
+URxvt.keysym.Control-Down:	\033[1;5B
+URxvt.keysym.Control-Right:	\033[1;5C
+URxvt.keysym.Control-Left:	\033[1;5D
+
+! resize font
+URxvt.resize-font.smaller:  C-A-u
+URxvt.resize-font.bigger:   C-A-i
+
+! Restore Ctrl+Shift+(c|v)
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! ------------------------------------------------------------------------------
+! Dmenu configs
+! ------------------------------------------------------------------------------
+
+!dmenu.selforeground:	    S_base1
+!dmenu.background:	        S_base03
+!dmenu.selbackground:	    S_base01
+!dmenu.foreground:	        S_base0
+                                                           

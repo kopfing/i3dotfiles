@@ -1,0 +1,6 @@
+#!/bin/sh
+echo uniting
+xrandr --delmonitor oben
+xrandr --delmonitor unten
+xrandr --fb 3841x2160
+xrandr --fb 3840x2160

@@ -1,0 +1,140 @@
+" Plugins with vim-plug
+call plug#begin('~/.vim/plugged')
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'tpope/vim-surround'
+    Plug 'lervag/vimtex'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'valloric/youcompleteme'
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'garbas/vim-snipmate'
+    Plug 'tomtom/tlib_vim'
+    Plug 'MarcWeber/vim-addon-mw-utils'
+    Plug 'honza/vim-snippets'
+    Plug 'scrooloose/nerdtree'
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
+    Plug 'takac/vim-hardtime'
+    Plug 'lilydjwg/colorizer'
+    Plug 'neovimhaskell/haskell-vim'
+call plug#end()
+
+
+" enable IndentGuides
+"let g:indent_guides_enable_on_vim_startup=1
+
+syntax enable
+filetype indent on
+au FocusLost * :wa      " autosave on losing focus (does this work)
+set hidden              " allows us to edit multiple buffers
+set visualbell
+"set showmatch           " show matching bracket for short time
+set ttyfast
+set undofile
+set cursorline          " highlight current line
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set smartindent
+set autoindent
+set expandtab           " spaces instead of real tabs
+set scrolloff=7
+set foldenable			" enable folding
+set foldlevelstart=99	" open folds when opening a buffer
+set foldmethod=syntax
+set foldnestmax=10
+set clipboard=unnamedplus   " yank and paste register references the clipboard
+set noesckeys " No delay when hitting Esc, but no function keys that start with Esc in insert mode
+
+" set cursor shape
+autocmd VimEnter * silent exec "! echo -ne '\e[1 q'"
+let &t_SI = "\<Esc>[5 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[1 q"
+
+" Line Numbers -------------------
+set number relativenumber  " set hybrid line numbers
+"augroup numbertoggle       " toggel to absolute line numbers in circumstances
+"  autocmd!
+"  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+"augroup END
+
+"let g:hardtime_default_on = 1 " Stop repeating jjjjjj
+set encoding=utf-8
+set fileencoding=utf-8
+
+let g:ycm_filetype_blacklist = {} " YouCompleteMe in allen Dateien nutzen
+
+" custom mappings -------------------------
+"
+let mapleader="-"
+"
+" buffers
+nnoremap gB :ls<CR>:b<Space>
+nnoremap gb :b#<CR>
+nnoremap <leader>b :buffer *
+" use :bufdo to do identical edits on every listed buffer
+"   z.B. :bufdo %s/foo/bar/g
+" use :bw to close a buffer
+"
+" files
+set wildmenu
+set wildignorecase
+set path=.,/home/me/FH/mitschrift/**,/home/me/Work/**,/home/me
+set wildignore+=*.pdf
+nnoremap <leader>f :find *
+"
+" windows
+" - natural splitting
+set splitbelow
+set splitright
+" - navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+"
+" session management
+let g:sessions_dir = '~/.vim/sessions'
+"exec 'nnoremap <Leader>ss :mks! ' . g:sessions_dir . '/<C-D>'
+"exec 'nnoremap <Leader>sr :so ' . g:sessions_dir . '/<C-D>'
+exec 'nnoremap <Leader>ss :mks! ' . g:sessions_dir . '/'
+exec 'nnoremap <Leader>sr :so ' . g:sessions_dir . '/'
+"
+" searching
+set hlsearch        	" highlight matches
+set incsearch       	" search as characters are entered
+set ignorecase
+set smartcase
+nnoremap / /\v
+vnoremap / /\v
+"
+" etc
+" - clear search highlights with esc
+nnoremap <Enter> :noh<CR>
+" - remap snipMate key (Tab already used by ycm)
+imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+"
+" - map spellchecking to F6
+let g:myLang = 0
+let g:myLangList = ['nospell', 'de_de', 'en_us']
+let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
+function! MySpellLang()
+  "loop through languages
+  if g:myLang == 0 | setlocal nospell | endif
+  if g:myLang == 1 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
+  if g:myLang == 2 | let &l:spelllang = g:myLangList[g:myLang] | setlocal spell | endif
+  echomsg 'language:' g:myLangList[g:myLang]
+  let g:myLang = g:myLang + 1
+  if g:myLang >= len(g:myLangList) | let g:myLang = 0 | endif
+endfunction
+map <F6> :<C-U>call MySpellLang()<CR>
+"map <F6> :setlocal spell! spelllang=en_us<CR>
+"
+" Build Markdown
+nnoremap <Leader>p :!pandoc -t latex -o output.pdf % --include-in-header ~/.vim/mdheader.tex<CR>
+map <leader>c :w! \| !compiler <c-r>%<CR>
+" Compile Haskell
+nnoremap <Leader>h :!ghc -dynamic %<CR>

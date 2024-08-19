@@ -1,0 +1,5 @@
+convert -units pixelsperinch -density 300 -page A4 Praxisbericht_Histologie_Lang.pdf test.jpg
+convert -units pixelsperinch -density 300 -page A4 test-{0..9}.jpg -units pixelsperinch -density 120 -page A4 Letzte\ Seite\ Bericht1.jpg -units pixelsperinch -density 100 -page A4 out.pdf
+pdf2ps out.pdf
+mv out.ps out1.ps
+ps2pdf out1.ps

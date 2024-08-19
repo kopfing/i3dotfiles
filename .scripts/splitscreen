@@ -1,0 +1,8 @@
+#!/bin/sh
+echo splitting
+xrandr --setmonitor unten 3840/1050x1620/443+0+540 HDMI-0
+xrandr --setmonitor oben 3840/1050x540/147+0+0 none
+xrandr --fb 3841x2160
+xrandr --fb 3840x2160
+xrandr -s 3840x2160
+i3-msg 'workspace 10; move workspace to output oben; workspace back_and_forth'
