@@ -17,7 +17,7 @@ else
 	echo "Window not detected... spawning."
     if [ $script = "tmuxdd" ]
     then
-        i3 "exec --no-startup-id $TERMINAL -title dropdown_$script -name dropdown_$script -n dropdown_$script"
+        i3 "exec --no-startup-id $TERMINAL -title dropdown_$script -name dropdown_$script -n dropdown_$script -e tmux"
     else
         i3 "exec --no-startup-id $TERMINAL -title dropdown_$script -name dropdown_$script -n dropdown_$script $@ -e $script"
     fi

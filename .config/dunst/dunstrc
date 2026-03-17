@@ -29,7 +29,11 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "350x5-0+28"
+    #geometry = "550x5-0+28"
+    width = "550"
+    #height = "5"
+    offset = "-0x+28"
+
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -46,7 +50,7 @@
     # The height of the entire notification.  If the height is smaller
     # than the font height and padding combined, it will be raised
     # to the font height and padding.
-    notification_height = 0
+    #notification_height = 0
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
@@ -85,7 +89,7 @@
 
     ### Text ###
 
-    font = Monospace 14
+    font = Monospace 18
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -196,7 +200,7 @@
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
-    startup_notification = false
+    #startup_notification = false
 
     ### Legacy
 

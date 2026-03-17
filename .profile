@@ -1,11 +1,13 @@
-#!/bin/sh
+#!/bin/zsh
 
 # Profile file. Runs on login.
 
-export PATH="$PATH:$HOME/.scripts:$HOME/.cabal/bin"
+export GRADLE_HOME="/usr/share/java/gradle"
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
+export PATH="$GRADLE_HOME:$JAVA_HOME:$HOME/.local/bin:$PATH:$HOME/.scripts:$HOME/.cabal/bin"
 export EDITOR="vim"
 export TERMINAL="urxvt"
-export BROWSER="/usr/bin/chromium"
+export BROWSER="/usr/bin/firefox"
 export READER="zathura"
 export FILE="ranger"
 

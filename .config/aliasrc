@@ -10,3 +10,4 @@ alias grep="grep --color=auto" # Color grep - highlight desired sequence.
 alias ccat="highlight --out-format=ansi" # Color cat - print file with syntax highlighting.
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias jarbs='/usr/bin/git --git-dir=$HOME/Work/JARBS/.git --work-tree=$HOME/Work/JARBS'
+alias claude='claude --dangerously-skip-permissions --plugin-dir ~/repos/claude-co-op'

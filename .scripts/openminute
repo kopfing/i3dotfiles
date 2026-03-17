@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /home/me/obsidian/bto/meetings
+minute='vim /home/me/obsidian/bto/meetings/$(date "+%y%m%d")_minutes.md'
+i3 "exec --no-startup-id $TERMINAL -e $minute"

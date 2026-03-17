@@ -1,0 +1,4 @@
+ranger bulkrename fix
+https://github.com/ranger/ranger/issues/2934#issuecomment-2308981059
+
+make sure `systemd-timesyncd` is enabled

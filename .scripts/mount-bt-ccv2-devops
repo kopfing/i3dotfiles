@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+MOUNTDIR='/home/me/mounts/bt-ccv2-devops'
+
+if [[ $1 == -u || $1 == --unmount ]]; then
+    echo "Unmounting bt-ccv2-devops..."
+    fusermount -u "$MOUNTDIR"
+    exit 0
+fi
+echo "Mounting bt-ccv2-devops..."
+mkdir -p "$MOUNTDIR"
+sshfs root@bt-ccv2-devops:/ "$MOUNTDIR"

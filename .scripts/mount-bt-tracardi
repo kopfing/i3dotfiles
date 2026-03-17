@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+MOUNTDIR='/home/me/mounts/bt-tracardi'
+
+if [[ $1 == -u || $1 == --unmount ]]; then
+    echo "Unmounting bt-tracardi..."
+    fusermount -u "$MOUNTDIR"
+    exit 0
+fi
+echo "Mounting bt-tracardi..."
+mkdir -p "$MOUNTDIR"
+sshfs bt-tracardi01:/ "$MOUNTDIR"

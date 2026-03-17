@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+MOUNTDIR='/home/me/mounts/bt-docker'
+
+if [[ $1 == -u || $1 == --unmount ]]; then
+    echo "Unmounting bt-docker..."
+    fusermount -u "$MOUNTDIR"
+    exit 0
+fi
+echo "Mounting bt-docker..."
+mkdir -p "$MOUNTDIR"
+sshfs bt-docker:/ "$MOUNTDIR"

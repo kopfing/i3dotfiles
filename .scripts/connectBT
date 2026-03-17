@@ -1,0 +1,3 @@
+#!/bin/zsh
+sudo chmod u+s /usr/sbin/pppd
+netExtender -u jan.moser -d blue-tomato.intern sslvpn.blue-tomato.com:4433

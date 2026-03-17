@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+MOUNTDIR='/home/me/mounts'
+
+if [[ $1 == -u || $1 == --unmount ]]; then
+    echo "Unmounting absitscldflrd01..."
+    fusermount -u "$MOUNTDIR/absitscldflrd01"
+    echo "Unmounting absitscldflrd02..."
+    fusermount -u "$MOUNTDIR/absitscldflrd02"
+    exit 0
+fi
+echo "Mounting absitscldflrd01..."
+mkdir -p "$MOUNTDIR/absitscldflrd01"
+sshfs absitscldflrd01:/ "$MOUNTDIR/absitscldflrd01" -o sftp_server="/usr/bin/sudo /usr/lib/openssh/sftp-server"
+echo "Mounting absitscldflrd02..."
+mkdir -p "$MOUNTDIR/absitscldflrd02"
+sshfs absitscldflrd02:/ "$MOUNTDIR/absitscldflrd02" -o sftp_server="/usr/bin/sudo /usr/lib/openssh/sftp-server"

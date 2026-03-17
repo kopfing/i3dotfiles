@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+MOUNTDIR='/home/me/mounts/bt-gw-002'
+
+if [[ $1 == -u || $1 == --unmount ]]; then
+    echo "Unmounting bt-gw-002..."
+    fusermount -u "$MOUNTDIR"
+    exit 0
+fi
+echo "Mounting bt-gw-002..."
+mkdir -p "$MOUNTDIR"
+sshfs root@bt-gw-002:/ "$MOUNTDIR"

@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+MOUNTDIR='/home/me/mounts/bt-cosi'
+
+if [[ $1 == -u || $1 == --unmount ]]; then
+    echo "Unmounting bt-cosi..."
+    fusermount -u "$MOUNTDIR"
+    exit 0
+fi
+echo "Mounting bt-cosi..."
+mkdir -p "$MOUNTDIR"
+sshfs bt-cosi:/ "$MOUNTDIR"

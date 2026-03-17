@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+MOUNTDIR='/home/me/mounts/bt-tools'
+
+if [[ $1 == -u || $1 == --unmount ]]; then
+    echo "Unmounting bt-tools..."
+    fusermount -u "$MOUNTDIR"
+    exit 0
+fi
+echo "Mounting bt-tools..."
+mkdir -p "$MOUNTDIR"
+sshfs bt-tools:/ "$MOUNTDIR"

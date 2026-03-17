@@ -3,9 +3,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'tpope/vim-surround'
-    Plug 'valloric/youcompleteme'
-    Plug 'terryma/vim-multiple-cursors'
-    "Plug 'garbas/vim-snipmate'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'SirVer/ultisnips'
     Plug 'tomtom/tlib_vim'
     Plug 'MarcWeber/vim-addon-mw-utils'
@@ -15,28 +13,22 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-pandoc/vim-pandoc-syntax'
     Plug 'takac/vim-hardtime'
     Plug 'lilydjwg/colorizer'
-    Plug 'neovimhaskell/haskell-vim'
     Plug 'morhetz/gruvbox'
-    Plug 'lervag/vimtex' "text objects, motions, word count, better syntax highlighting, indentation?
     Plug 'Konfekt/FastFold' "makes folding faster
     Plug 'majutsushi/tagbar' "outline viewer
-    Plug 'vim-syntastic/syntastic' 
+    Plug 'vim-syntastic/syntastic'
     Plug 'francoiscabrol/ranger.vim' "use ranger in vim with <leader>f
     Plug 'rbgrouleff/bclose.vim' "dependency for ranger.vim
     Plug 'tpope/vim-commentary' "comment stuff out
+    Plug 'github/copilot.vim'
 call plug#end()
 
 
-" enable IndentGuides
-"let g:indent_guides_enable_on_vim_startup=1
-
 syntax enable
 filetype plugin indent on
-au FocusLost * :wa      " autosave on losing focus (does this work)
 set hidden              " allows us to edit multiple buffers
 set title               " set teriminal title
 set visualbell
-"set showmatch           " show matching bracket for short time
 set ttyfast             " faster redrawing
 set undofile
 set cursorline          " highlight current line
@@ -55,7 +47,8 @@ set foldlevelstart=99	" open folds when opening a buffer
 set foldnestmax=10
 set foldmethod=indent
 set clipboard=unnamedplus   " yank and paste register references the clipboard
-set noesckeys " No delay when hitting Esc, but no function keys that start with Esc in insert mode
+set updatetime=300
+set signcolumn=yes " always show sign column to avoid text shifting
 
 " jump to last cursor position at open
 autocmd BufReadPost *
@@ -80,41 +73,47 @@ let &t_EI = "\<Esc>[1 q"
 
 " Line Numbers -------------------
 set number relativenumber  " set hybrid line numbers
-"augroup numbertoggle       " toggel to absolute line numbers in circumstances
-"  autocmd!
-"  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-"  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-"augroup END
-
-"let g:hardtime_default_on = 1 " Stop repeating jjjjjj
 set encoding=utf-8
 set fileencoding=utf-8
 
-let g:ycm_filetype_blacklist = {} " YouCompleteMe in allen Dateien nutzen
+" Copilot -------------------
+" use CTRL-J instead of TAB to accept suggestions
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+" use CTRL-SPACE to accept one word of the current suggestion
+inoremap <C-Space> <Plug>(copilot-accept-word)
+inoremap <C-@> <Plug>(copilot-accept-word)
+imap <C-L> <Plug>(copilot-accept-line)
+imap <leader>] <Plug>(copilot-next)
+imap <leader>[ <Plug>(copilot-previous)
+
+" Coc ----------------------
+" Use tab for trigger completion with characters ahead and navigate
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Coding zeug: Ich hab derzeit keinen language server installiert, deswegen geht das hier nicht. Aber geniale sachen - siehe Wiki vom plugin
+"" GoTo code navigation
+"nmap <silent><nowait> gd <Plug>(coc-definition)
+"nmap <silent><nowait> gy <Plug>(coc-type-definition)
+"nmap <silent><nowait> gi <Plug>(coc-implementation)
+"nmap <silent><nowait> gr <Plug>(coc-references)
+
+" -----------------------------
 
 " when opening directories with vim start ranger instead of Netrw or NerdTree
 let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
 
-" LaTeX ----------------------------------
-" - alle tex files als latex files erkennen, egal ob preamble existiert oder nicht
-let g:tex_flavor = "latex"
-" - indentation for tex files
-autocmd BufRead,BufNewFile *.sty setl filetype=tex
-autocmd FileType tex setl sw=2
-autocmd FileType tex setl tabstop=2
-autocmd FileType tex setl softtabstop=2
-autocmd FileType tex setl softtabstop=2
-"autocmd FileType tex let g:ycm_auto_trigger=0
-" Spellcheck
-autocmd FileType tex,markdown,rst,mail setl spell spelllang=de
-autocmd FileType tex,markdown,rst,mail setl linebreak
-" folding
-au FileType tex,markdown setl foldmethod=syntax
-au FileType tex,markdown setl foldcolumn=5
-" ignore LaTeX temporary files
-set wildignore+=*.aux,*.bbl,*.bcf,*.blg,*.fls,*.idx,*.ilg,*.ind,*.log,*.out,*.run.xml,*synctex.gz,*.fdb_latexmk,*.nav,*.snm,*.toc,*.vrb,*.cut,*.lo,*.brf
-"
+let g:pandoc#spell#enabled = 0
 " custom mappings -------------------------
 "
 "let mapleader="-"
@@ -130,7 +129,7 @@ nnoremap <leader>b :buffer *
 " files
 set wildmenu
 set wildignorecase
-set path=.,/home/me/FH/mitschrift/**,/home/me/Work/**,/home/me
+set path=.,/home/me/Work/**,/home/me
 set wildignore+=*.pdf
 nnoremap <leader>f :find *
 "
@@ -174,24 +173,22 @@ function! MySpellLang()
   if g:myLang >= len(g:myLangList) | let g:myLang = 0 | endif
 endfunction
 map <F6> :<C-U>call MySpellLang()<CR>
-"map <F6> :setlocal spell! spelllang=en_us<CR>
 "
 " - scroll the viewport faster
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 " etc
 " - remap ultisnip
-let g:UltiSnipsExpandTrigger="<C-Space>"
-let g:UltiSnipsJumpForwardTrigger="<C-Space>"
+"   only deactivated, because of conflict with copilot
+let g:UltiSnipsExpandTrigger="<C-g>"
+let g:UltiSnipsJumpForwardTrigger="<C-g>"
 let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 " let :UltiSnipsEdit split the window
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsEnableSnipMate=0
-let g:tex_indent_items=0
 "
 " FastFold
 let g:markdown_folding = 1
-let g:tex_fold_enabled = 1
 let g:vimsyn_folding = 'af'
 "
 " tagbar
@@ -209,8 +206,16 @@ let g:syntastic_check_on_wq = 0
 " Build Markdown
 nnoremap <Leader>p :!pandoc -t latex -V papersize:a4 -o output.pdf % --include-in-header ~/.vim/mdheader.tex<CR>
 map <leader>c :w! \| !compiler <c-r>%<CR>
-" Compile Haskell
-nnoremap <Leader>h :!ghc -dynamic %<CR>
-
-so ~/.config/vim/colorgruvbox
-so ~/.config/vim/autocmds
+set background=dark
+let g:gruvbox_italic=1
+colorscheme gruvbox
+let g:airline_solarized_dark_text = 1
+let g:airline_theme='gruvbox'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = 1
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.maxlinenr = ''

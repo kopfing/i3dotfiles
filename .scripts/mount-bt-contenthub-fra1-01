@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+MOUNTDIR='/home/me/mounts/bt-contenthub-fra1-01'
+
+if [[ $1 == -u || $1 == --unmount ]]; then
+    echo "Unmounting bt-contenthub-fra1-01..."
+    fusermount -u "$MOUNTDIR"
+    exit 0
+fi
+echo "Mounting bt-contenthub-fra1-01..."
+mkdir -p "$MOUNTDIR"
+sshfs bt-contenthub-fra1-01:/ "$MOUNTDIR"
