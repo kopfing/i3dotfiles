@@ -60,6 +60,7 @@ prompt_end() {
 # Each component will draw itself, and hide itself if no information needs to be shown
 
 # Context: user@hostname (who am I and where am I)
+# DEFAULT_USER is set once in .profile at login.
 prompt_context() {
     if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CONNECTION" ]]; then
         prompt_segment 237 7 "%(!.%{%F{3}%}.)%n@%m"
@@ -73,9 +74,11 @@ prompt_dir() {
 }
 
 # Git: current branch and status
+# Skip the dotfiles repo (rooted at $HOME) to avoid noise in every directory.
 prompt_git() {
     (( $+commands[git] )) || return
     git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return
+    [[ "$(git rev-parse --show-toplevel 2>/dev/null)" == "$HOME" ]] && return
 
     local branch ahead behind
     local staged=0

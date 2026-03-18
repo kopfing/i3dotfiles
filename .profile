@@ -10,6 +10,7 @@ export TERMINAL="urxvt"
 export BROWSER="/usr/bin/firefox"
 export READER="zathura"
 export FILE="ranger"
+export DEFAULT_USER="$USER"
 
 # less/man colors
 export LESS="--RAW-CONTROL-CHARS"
