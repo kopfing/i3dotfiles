@@ -4,13 +4,8 @@
 
 setopt PROMPT_SUBST
 
-
 CURRENT_BG='NONE'
-
-case ${SOLARIZED_THEME:-dark} in
-    light) CURRENT_FG='3';;
-    *)     CURRENT_FG='0';;
-esac
+CURRENT_FG='0'
 
 # Special Powerline characters
 
@@ -70,7 +65,8 @@ prompt_context() {
 
 # Dir: current working directory
 prompt_dir() {
-    prompt_segment 4 $CURRENT_FG '%1~'
+    prompt_segment 8 $CURRENT_FG '%1~'
+    #prompt_segment 7 237 '%1~'
 }
 
 # Git: current branch and status
@@ -153,8 +149,8 @@ prompt_virtualenv() {
             venv_name="${VIRTUAL_ENV:h:t}"
         fi
 
-        prompt_segment 237 4 "(${venv_name})"
-        #prompt_segment 2 0 "(${venv_name})"
+        prompt_segment 237 12 "(${venv_name})"
+        #prompt_segment 8 4 "(${venv_name})"
     fi
 }
 
@@ -303,6 +299,17 @@ Command: $cmd" \
 
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+
+# Set SSH agent socket and add key #############################
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+ssh-add -l &>/dev/null
+ssh_add_status=$?
+# 0 means already added, 1 means no key added yet, 2 means ssh-agent not running
+if [[ $ssh_add_status -eq 1 ]]; then
+  ssh-add ~/.ssh/id_ed25519 &>/dev/null
+fi
+##################################################################
 
 source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
 source ~/.shortcuts
