@@ -183,11 +183,8 @@ build_prompt() {
 
 
 autoload -U colors && colors
-#PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%1~%{$fg[red]%}]%{$reset_color%}$%b$(build_prompt) "
 PROMPT='$(build_prompt) '
 RPROMPT='%*'
-
-# export CATALINA_HOME=/home/me/IdeaProjects/apache-tomcat-9.0.33
 
 # History in cache directory:
 HISTSIZE=100000
@@ -209,7 +206,6 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 # Basic auto/tab complete:
 autoload -Uz compinit
 zstyle ':completion:*' menu select
-zstyle ':completion:*:*:git:*' script ~/.config/zsh/git-completion.bash
 fpath=(~/.config/zsh $fpath)
 zmodload zsh/complist
 compinit -d ~/.cache/zsh/zcompdump
