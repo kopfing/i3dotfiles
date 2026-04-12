@@ -1,0 +1,3 @@
+#!/bin/zsh
+echo "trying to mount homeassistant config to /home/me/homeassistant/config"
+sshfs ha:/homeassistant /home/me/homeassistant/config || (echo "Maybe already mounted. Unmounting..." && fusermount -u /home/me/homeassistant/config)
