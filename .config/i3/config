@@ -1,21 +1,13 @@
 #vim: filetype=i3
-#
-#
-#   ToDo: 
-#       auto mount usb etc
-#       check .scripts (dmenu...)
-#       $micmute (search for it)
-#
-#
 
 # #---Basic Definitions---# #
 # Needed for i3-gaps
-for_window [class="^.*"] border pixel 3
 #for_window [class="^.*"] border none
-gaps inner 15
+for_window [class="^.*"] border pixel 3
+gaps inner 0
 gaps outer 0
 focus_follows_mouse no
-focus_wrapping force # always wrap -> use focus parent to switch to different container
+#focus_wrapping force # always wrap -> use focus parent to switch to different container
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 set $alt Mod1
@@ -34,18 +26,15 @@ client.placeholder      #a89984 #ebdbb2 #282828 #a89984   #a89984
 
 client.background       #ffffff
 
-floating_maximum_size 2800 x 1400
-floating_modifier $mod
-
 # #---Dropdown Windows---# #
 # General dropdown window traits. The order can matter.
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_*"] scratchpad show
-for_window [instance="dropdown_tmuxdd"] resize set 2200 900
-for_window [instance="dropdown_ncmpcpp"] resize set 2200 1200
-for_window [instance="dropdown_htop"] resize set 2200 1200
+for_window [instance="dropdown_tmuxdd"] resize set 1400 850
+for_window [instance="dropdown_ncmpcpp"] resize set 1400 850
+for_window [instance="dropdown_htop"] resize set 1400 850
 for_window [instance="dropdown_dropdowncalc"] resize set 800 300
 for_window [instance="dropdown_tmuxdd"] border pixel 3
 #for_window [instance="dropdown_ncmpcpp"] border pixel 3
@@ -54,7 +43,7 @@ for_window [instance="dropdown_*"] move position center
 
 # #---Starting External Scripts---# #
 # Setting background wallpaper
-exec_always xwallpaper --zoom ~/.config/wall.png
+exec_always xwallpaper --tile ~/.config/wall.png
 # Starts dunst for notifications:
 exec --no-startup-id dunst
 # Composite manager:
@@ -64,27 +53,23 @@ exec --no-startup-id dunst
 exec --no-startup-id ~/.scripts/remaps
 # Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
-# Network manager applet
+# Network manager applet (not using NetworkManager on tower)
 #exec --no-startup-id nm-applet
 # source .Xresources
-# exec_always --no-startup-id xrdb ~/.Xresources
+exec_always --no-startup-id xrdb ~/.Xresources
 # start udiskie for automount usb devices
 exec --no-startup-id udiskie
 # start redshift-gtk for blue light filter including tray icon
 exec --no-startup-id redshift-gtk
 # start nextcloud
 exec --no-startup-id nextcloud
-# turn off screen power safer
-exec --no-startup-id xset -dpms
-exec --no-startup-id xset s off
-# turn TV into two screens
-exec --no-startup-id splitscreen
-# start music player client on top screen
-exec --no-startup-id i3-msg 'workspace 10; gaps inner current set 0; gaps outer current set 0; exec $term -e ncmpcpp -c ~/.config/ncmpcpp/config.oben; move workspace to output oben'
+# turn off screen power safer (why?)
+#exec --no-startup-id xset -dpms
+#exec --no-startup-id xset s off
 # set custom hotkeys (*)
 exec --no-startup-id xbindkeys
-# discord für uni
-#exec --no-startup-id discord --start-minimized
+# two monitors with right one rotated (for sheet music)
+exec --no-startup-id bassmons.sh
 
 # Set Xresources colors:
 # set_from_resource $color0	color7  #000000
@@ -121,10 +106,8 @@ set_from_resource $color7	color7  #000000
 set_from_resource $color15	color15  #000000
 
 bar {
-    output unten
-    output HDMI-0
 	font pango:Roboto Mono for powerline,fontawesome 12
-    height 40
+    height 27
 	colors {
 			background $color8
 			statusline $color8
@@ -135,7 +118,7 @@ bar {
        		urgent_workspace   $color8 $color8 $color15
 		}
 	status_command i3status
-	position bottom
+	position top
 	mode dock
 	modifier None
     strip_workspace_numbers yes
@@ -154,8 +137,6 @@ bindsym $mod+Shift+BackSpace	exec --no-startup-id prompt "Are you sure you want 
 
 # #---Letter Key Bindings---# #
 bindsym $mod+q			[con_id="__focused__" instance="^(?!dropdown).*$"] kill
-
-bindsym $mod+Control+f exec --no-startup-id togglesplitscreen
 
 bindsym $mod+w			layout stacked
 bindsym $mod+e          layout toggle split
@@ -185,7 +166,7 @@ bindsym $mod+a			exec --no-startup-id ddspawn dropdowncalc -f mono:pixelsize=24
 bindsym $mod+s			gaps inner current plus 5
 bindsym $mod+Shift+s		gaps inner current minus 5
 
-bindsym $mod+d			exec --no-startup-id dmenu_run -b -i -nb '#282828' -nf '#ebdbb2' -sb '#ebdbb2' -sf '#282828' -fn "Roboto Mono for powerline-16"
+bindsym $mod+d			exec --no-startup-id dmenu_run -i -nb '#282828' -nf '#ebdbb2' -sb '#ebdbb2' -sf '#282828' -fn "Roboto Mono for powerline-16"
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
 bindsym $mod+f			fullscreen toggle
@@ -226,15 +207,15 @@ bindsym $mod+slash		split vertical ;; exec $term
 bindsym $mod+Shift+slash	kill
 bindsym $mod+backslash		workspace back_and_forth
 
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8:"
-set $ws9 "9:"
+set $ws8 "8"
+set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
@@ -264,6 +245,13 @@ bindsym $mod+Shift+0	move container to workspace $ws10
 #for_window [title="GIMP Startup"] move workspace $ws5
 #for_window [class="Gimp"] move workspace $ws5
 
+# move workspace to output
+bindsym $mod+Shift+Down     move workspace to output next
+bindsym $mod+Shift+Right     move workspace to output right
+bindsym $mod+Shift+Left     move workspace to output left
+bindsym $mod+Shift+Up     move workspace to output primary
+
+
 
 # #---Function Buttons---# #
 bindsym $mod+F3		exec --no-startup-id displayselect
@@ -271,16 +259,6 @@ bindsym $mod+F4		exec --no-startup-id $hibernate
 bindsym $mod+F9		exec --no-startup-id dmenumount
 bindsym $mod+F10	exec --no-startup-id dmenuumount
 bindsym $mod+F11	exec --no-startup-id dmenuarchwiki
-
-# #---Arrow Keys---# #
-bindsym $mod+Left		focus left
-bindsym $mod+Down		focus down
-bindsym $mod+Up			focus up
-bindsym $mod+Right 		focus right
-bindsym $mod+Shift+Left		move left
-bindsym $mod+Shift+Down		move down
-bindsym $mod+Shift+Up		move up
-bindsym $mod+Shift+Right 	move right
 
 # #---Media Keys---# #
 

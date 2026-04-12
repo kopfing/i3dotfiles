@@ -4,7 +4,8 @@
 ! Font configuration
 ! ------------------------------------------------------------------------------
 
-*font:				xft:Roboto Mono for powerline:size=12
+*font:				xft:Roboto Mono for powerline:size=16,xft:Symbola:size=16,xft:FontAwesome:size=16,xft:Noto Color Emoji:size=16
+!*font:				xft:Roboto Mono for powerline:size=12
 !*font:				xft:SauceCodePro Nerd Font Mono:size=13:semibold
 !*font:				xft:RobotoMono Nerd Font Mono:size=12
 
@@ -13,7 +14,7 @@
 ! Xft Font Configuration
 ! ------------------------------------------------------------------------------
 
-Xft.dpi: 138
+!Xft.dpi: 138
 Xft.autohint: 0
 Xft.lcdfilter: lcddefault
 Xft.hintstyle: hintslight
@@ -25,9 +26,12 @@ Xft.rgba: rgb
 ! URxvt configs
 ! ------------------------------------------------------------------------------
 
+! enable alt key
+URxvt.meta8:            false
+
 ! font spacing
-URxvt*letterSpace:		1
-URxvt.lineSpace:		1
+URxvt*letterSpace:		0
+URxvt.lineSpace:		0
 
 ! general settings
 URxvt*saveline:			15000
@@ -42,23 +46,21 @@ URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 
 ! appearance
-! URxvt*depth:			24
+URxvt*depth:			24
 URxvt*scrollBar:		false
 URxvt*scrollBar_right:	false
 URxvt*internalBorder:	30
 URxvt*externalBorder:	0
-URxvt.geometry:			84x22
-!URxvt*transparent:      true
-!URxvt*shading:          20
+URxvt.geometry:			1000x1000
 
 ! perl extensions
-URxvt.perl-ext:	default,url-select,keyboard-select,resize-font
+URxvt.perl-ext:	default,matcher,keyboard-select,resize-font
 
 URxvt.keysym.M-Escape:	perl:keyboard-select:activate
 URxvt.keysym.M-s:		perl:keyboard-select:search
-URxvt.keysym.M-u:		perl:url-select:select_next
-URxvt.url-select.launcher: /usr/bin/xdg-open
-URxvt.url-select.underline:	true
+URxvt.keysym.M-u:		perl:matcher:list
+URxvt.matcher.button:       2
+URxvt.url-launcher:     firefox
 
 ! scroll one line
 URxvt.keysym.Shift-Up:		command:\033]720;1\007

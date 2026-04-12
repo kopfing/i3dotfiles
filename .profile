@@ -4,8 +4,7 @@ export GOPATH=$HOME/.local/go
 export PATH=$PATH:$HOME/.scripts:$GOPATH/bin:$HOME/.local/share/gem/ruby/3.0.0/bin:$HOME/.local/bin
 export TERMINAL="urxvt"
 export EDITOR="vim"
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-ssh-add
+export DEFAULT_USER="$USER"
 
 if [[ "$(tty)" = "/dev/tty1" ]]; then
 	pgrep i3 || startx
