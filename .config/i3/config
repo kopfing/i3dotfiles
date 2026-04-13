@@ -42,6 +42,9 @@ for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
 # #---Starting External Scripts---# #
+# start playerctld for media player control via playerctl (latest used player is controlled)
+# if i want to control a specific player, i can use playerctl --player=Feishin for example (man playerctl)
+exec --no-startup-id playerctld daemon
 # Setting background wallpaper
 exec_always xwallpaper --tile ~/.config/pix.png
 # Starts dunst for notifications:
@@ -335,10 +338,22 @@ bindsym XF86AudioRaiseVolume	exec --no-startup-id lmc up 5
 #bindsym XF86WWW			exec --no-startup-id $BROWSER
 #bindsym XF86ScreenSaver		exec exec --no-startup-id lockscreen
 #bindsym XF86MyComputer		exec $term -e ranger
-#bindsym XF86AudioNext		exec --no-startup-id lmc next
-#bindsym XF86AudioPlay		exec --no-startup-id lmc toggle
-#bindsym XF86AudioPrev		exec --no-startup-id lmc prev
-#bindsym XF86AudioStop		exec --no-startup-id lmc toggle
+
+# Mediaplayer controls
+bindsym XF86AudioNext		exec --no-startup-id playerctl next
+bindsym XF86AudioPlay		exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPrev		exec --no-startup-id playerctl previous
+bindsym XF86AudioStop		exec --no-startup-id playerctl stop
+bindsym Shift+XF86AudioNext     exec --no-startup-id playerctl position 10+
+bindsym Shift+XF86AudioPrev     exec --no-startup-id playerctl position 10-
+bindsym KP_Multiply     exec --no-startup-id playerctl play-pause
+bindsym KP_Divide       exec --no-startup-id playerctl next
+bindsym Shift+KP_Divide       exec --no-startup-id playerctl previous
+bindsym KP_Subtract     exec --no-startup-id playerctl volume 0.1-
+bindsym KP_Add          exec --no-startup-id playerctl volume 0.1+
+bindsym Shift+KP_Add    exec --no-startup-id playerctl position 2+
+bindsym Shift+KP_Subtract    exec --no-startup-id playerctl position 2-
+
 #bindsym XF86AudioRewind		exec --no-startup-id lmc back 10
 #bindsym XF86AudioForward	exec --no-startup-id lmc forward 10
 #bindsym XF86HomePage		exec $BROWSER https://lukesmith.xyz
