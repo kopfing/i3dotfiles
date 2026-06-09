@@ -41,12 +41,23 @@ for_window [instance="dropdown_htop"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
 for_window [instance="dropdown_*"] move position center
 
+# Always place Feishin (music player) on workspace 9
+assign [class="feishin"] $ws9
+
 # #---Starting External Scripts---# #
+# start xfsettingsd for setting dark mode for gtk apps
+# installed via xfce4-settings
+# theme must be set to Adwaita-dark with `xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"`
+#    or install gruvbox-dark-gtk and set it to that
+# must run before remaps script
+# NOT NEEDED WHEN GTK3 IS CONFIGURED PROPERLY?
+#exec --no-startup-id xfsettingsd
 # start playerctld for media player control via playerctl (latest used player is controlled)
 # if i want to control a specific player, i can use playerctl --player=Feishin for example (man playerctl)
 exec --no-startup-id playerctld daemon
 # Setting background wallpaper
-exec_always xwallpaper --tile ~/.config/pix.png
+#exec_always xwallpaper --tile ~/.config/pix.png
+exec_always xwallpaper --zoom ~/.config/wallpapers/Austrian_Parliament_Building-Pallas_Athene_Fountain.png
 # Starts dunst for notifications:
 exec --no-startup-id dunst
 # Composite manager: disabled because no gaps
@@ -226,7 +237,7 @@ bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id botto
 bindsym $mod+n			exec $term -e newspod
 ##bindsym $mod+Shift+n
 
-bindsym $mod+m 			exec --no-startup-id $term -e ncmpcpp; gaps inner current set 15; gaps outer current set 90
+bindsym $mod+m			exec --no-startup-id "pgrep -x feishin >/dev/null || feishin"; workspace $ws9; [class="feishin"] focus
 bindsym $mod+Shift+m		exec --no-startup-id lmc mute
 
 # #---Workspace Bindings---# #
@@ -346,13 +357,13 @@ bindsym XF86AudioPrev		exec --no-startup-id playerctl previous
 bindsym XF86AudioStop		exec --no-startup-id playerctl stop
 bindsym Shift+XF86AudioNext     exec --no-startup-id playerctl position 10+
 bindsym Shift+XF86AudioPrev     exec --no-startup-id playerctl position 10-
-bindsym KP_Multiply     exec --no-startup-id playerctl play-pause
-bindsym KP_Divide       exec --no-startup-id playerctl next
-bindsym Shift+KP_Divide       exec --no-startup-id playerctl previous
-bindsym KP_Subtract     exec --no-startup-id playerctl volume 0.1-
-bindsym KP_Add          exec --no-startup-id playerctl volume 0.1+
-bindsym Shift+KP_Add    exec --no-startup-id playerctl position 2+
-bindsym Shift+KP_Subtract    exec --no-startup-id playerctl position 2-
+bindsym KP_Multiply     exec --no-startup-id playerctl --player=Feishin play-pause
+bindsym KP_Divide       exec --no-startup-id playerctl --player=Feishin next
+bindsym Shift+KP_Divide       exec --no-startup-id playerctl --player=Feishin previous
+bindsym KP_Subtract     exec --no-startup-id playerctl --player=Feishin volume 0.02-
+bindsym KP_Add          exec --no-startup-id playerctl --player=Feishin volume 0.02+
+bindsym Shift+KP_Add    exec --no-startup-id playerctl --player=Feishin position 2+
+bindsym Shift+KP_Subtract    exec --no-startup-id playerctl --player=Feishin position 2-
 
 #bindsym XF86AudioRewind		exec --no-startup-id lmc back 10
 #bindsym XF86AudioForward	exec --no-startup-id lmc forward 10

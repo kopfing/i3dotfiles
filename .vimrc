@@ -8,19 +8,21 @@ call plug#begin('~/.vim/plugged')
     Plug 'tomtom/tlib_vim'
     Plug 'MarcWeber/vim-addon-mw-utils'
     Plug 'honza/vim-snippets'
-    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree' " file explorer
     Plug 'vim-pandoc/vim-pandoc'
     Plug 'vim-pandoc/vim-pandoc-syntax'
     Plug 'takac/vim-hardtime'
     Plug 'lilydjwg/colorizer'
     Plug 'morhetz/gruvbox'
     Plug 'Konfekt/FastFold' "makes folding faster
-    Plug 'majutsushi/tagbar' "outline viewer
-    Plug 'vim-syntastic/syntastic'
+    Plug 'majutsushi/tagbar' "outline viewer for code files
+    Plug 'vim-syntastic/syntastic' "syntax checking
     Plug 'francoiscabrol/ranger.vim' "use ranger in vim with <leader>f
     Plug 'rbgrouleff/bclose.vim' "dependency for ranger.vim
     Plug 'tpope/vim-commentary' "comment stuff out
-    Plug 'github/copilot.vim'
+    Plug 'github/copilot.vim' " AI code completion
+    Plug 'vim-voom/VOoM' " outline viewer for markdown files
+    Plug 'airblade/vim-gitgutter' " shows git changes in the sign column
 call plug#end()
 
 
@@ -48,7 +50,9 @@ set foldnestmax=10
 set foldmethod=indent
 set clipboard=unnamedplus   " yank and paste register references the clipboard
 set updatetime=300
-set signcolumn=yes " always show sign column to avoid text shifting
+"set signcolumn=yes " always show sign column to avoid text shifting
+set encoding=utf-8
+set fileencoding=utf-8
 
 " jump to last cursor position at open
 autocmd BufReadPost *
@@ -72,9 +76,7 @@ let &t_SR = "\<Esc>[4 q"
 let &t_EI = "\<Esc>[1 q"
 
 " Line Numbers -------------------
-set number relativenumber  " set hybrid line numbers
-set encoding=utf-8
-set fileencoding=utf-8
+"set number relativenumber  " set hybrid line numbers
 
 " Copilot -------------------
 " use CTRL-J instead of TAB to accept suggestions
@@ -114,6 +116,10 @@ let g:NERDTreeHijackNetrw = 0
 let g:ranger_replace_netrw = 1
 
 let g:pandoc#spell#enabled = 0
+" Deaktiviert die Anzeige der Faltungsspalte (Fold Column)
+let g:pandoc#folding#fdc = 0
+" Faltung komplett auf manuell stellen
+let g:pandoc#folding#mode = ['manual']
 " custom mappings -------------------------
 "
 "let mapleader="-"
@@ -191,8 +197,38 @@ let g:UltiSnipsEnableSnipMate=0
 let g:markdown_folding = 1
 let g:vimsyn_folding = 'af'
 "
-" tagbar
+" tagbar / VoOM
+" currently tagbar is used for everything
+"    for markdown editing in the outline viewer VoOM needs to be used
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_ctags_bin = 'ctags'
+
+let g:tagbar_type_terraform = {
+      \ 'ctagstype': 'Terraform',
+      \ 'kinds': [
+      \   'r:resources',
+      \   'd:data',
+      \   'm:modules',
+      \   'v:variables',
+      \   'o:outputs',
+      \   'l:locals',
+      \   'p:providers',
+      \ ],
+      \ 'sro': '.',
+      \ 'kind2scope': {
+      \   'r': 'resource',
+      \   'd': 'data',
+      \   'm': 'module',
+      \ },
+      \ }
+
+let g:voom_python_versions = [3]
+let g:voom_ft_modes = {
+      \ 'markdown': 'markdown',
+      \ 'pandoc': 'markdown',
+      \ }
+nnoremap <leader>vo :Voom<CR>
+nnoremap <leader>vm :Voom markdown<CR>
 "
 " syntastic
 set statusline+=%#warningmsg#
