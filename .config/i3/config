@@ -33,7 +33,7 @@ for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_*"] scratchpad show
 for_window [instance="dropdown_tmuxdd"] resize set 1400 850
-for_window [instance="dropdown_ncmpcpp"] resize set 1400 850
+#for_window [instance="dropdown_ncmpcpp"] resize set 1400 850
 for_window [instance="dropdown_htop"] resize set 1400 850
 for_window [instance="dropdown_dropdowncalc"] resize set 800 300
 for_window [instance="dropdown_tmuxdd"] border pixel 3
@@ -66,8 +66,8 @@ exec --no-startup-id nextcloud
 # turn off screen power safer (why?)
 #exec --no-startup-id xset -dpms
 #exec --no-startup-id xset s off
-# set custom hotkeys (*)
-exec --no-startup-id xbindkeys
+# set custom hotkeys (mpd, not used anymore)
+#exec --no-startup-id xbindkeys
 # two monitors with right one rotated (for sheet music)
 exec --no-startup-id bassmons.sh
 
@@ -198,7 +198,7 @@ bindsym $mod+c			exec --no-startup-id firefox
 
 bindsym $mod+b			bar mode toggle
 
-bindsym $mod+m			exec --no-startup-id ddspawn ncmpcpp
+bindsym $mod+m			exec --no-startup-id "pgrep -x feishin >/dev/null || feishin"; workspace $ws9; [class="feishin"] focus
 
 # #---Workspace Bindings---# #
 bindsym $mod+Tab		workspace back_and_forth
@@ -263,7 +263,7 @@ bindsym $mod+F11	exec --no-startup-id dmenuarchwiki
 # #---Media Keys---# #
 
 # For screenshots
-bindsym Print 			exec --no-startup-id scrot "/home/me/Pictures/Screenshots/`date +%Y%m%d-%H%M%S`.png"
+bindsym Print 			exec --no-startup-id flameshot gui
 bindsym $mod+Print 		exec --no-startup-id scrot -u "/home/me/Pictures/Screenshots/`date +%Y%m%d-%H%M%S`.png"
 bindsym $mod+Shift+Print    exec --no-startup-id maim -s "/home/me/Pictures/Screenshots/`date +%Y%m%d-%H%M%S`.png"
 
@@ -288,6 +288,13 @@ bindsym XF86AudioPrev		exec --no-startup-id lmc prev
 bindsym XF86AudioStop		exec --no-startup-id lmc toggle
 bindsym XF86AudioRewind		exec --no-startup-id lmc back 10
 bindsym XF86AudioForward	exec --no-startup-id lmc forward 10
+bindsym KP_Multiply         exec --no-startup-id playerctl --player=Feishin play-pause
+bindsym KP_Divide           exec --no-startup-id playerctl --player=Feishin next
+bindsym Shift+KP_Divide     exec --no-startup-id playerctl --player=Feishin previous
+bindsym KP_Subtract         exec --no-startup-id playerctl --player=Feishin volume 0.02-
+bindsym KP_Add              exec --no-startup-id playerctl --player=Feishin volume 0.02+
+bindsym Shift+KP_Add        exec --no-startup-id playerctl --player=Feishin position 2+
+bindsym Shift+KP_Subtract   exec --no-startup-id playerctl --player=Feishin position 2-
 bindsym XF86HomePage		exec $BROWSER https://lukesmith.xyz
 bindsym XF86Reload		restart
 bindsym XF86AudioMicMute	exec --no-startup-id lmc micmute
