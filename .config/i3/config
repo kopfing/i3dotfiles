@@ -159,7 +159,7 @@ bindsym $mod+e          layout toggle split
 
 bindsym $mod+Shift+e		exec --no-startup-id tutorialvids
 
-bindsym $mod+r 			exec $term -e ranger
+bindsym $mod+r 			exec $term -e ranger ~/repos
 bindsym $mod+Shift+r		exec $term -e sudo ranger /
 
 bindsym $mod+t			split toggle

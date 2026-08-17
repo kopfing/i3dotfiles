@@ -79,6 +79,8 @@ let &t_EI = "\<Esc>[1 q"
 "set number relativenumber  " set hybrid line numbers
 
 " Copilot -------------------
+" force the plugin back to the bundled script by disabling npx mode
+let g:copilot_npx_command = 0
 " use CTRL-J instead of TAB to accept suggestions
 let g:copilot_no_tab_map = v:true
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
