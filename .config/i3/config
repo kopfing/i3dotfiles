@@ -63,13 +63,16 @@ exec --no-startup-id udiskie
 exec --no-startup-id redshift-gtk
 # start nextcloud
 exec --no-startup-id nextcloud
+exec --no-startup-id obsidian --password-store=gnome-libsecret
 # turn off screen power safer (why?)
 #exec --no-startup-id xset -dpms
 #exec --no-startup-id xset s off
 # set custom hotkeys (mpd, not used anymore)
 #exec --no-startup-id xbindkeys
 # two monitors with right one rotated (for sheet music)
-exec --no-startup-id bassmons.sh
+#exec --no-startup-id bassmons.sh
+# two monitors
+exec --no-startup-id twomons.sh
 
 # Set Xresources colors:
 # set_from_resource $color0	color7  #000000
@@ -155,7 +158,7 @@ bindsym $mod+Shift+u		exec --no-startup-id "bash ~/.scripts/i3resize down"
 bindsym $mod+i 			exec --no-startup-id ddspawn htop
 bindsym $mod+Shift+i		exec --no-startup-id "bash ~/.scripts/i3resize up"
 
-bindsym $mod+o			sticky toggle
+#bindsym $mod+o			sticky toggle
 bindsym $mod+Shift+o		exec --no-startup-id "bash ~/.scripts/i3resize right"
 
 bindsym $mod+p			focus parent
@@ -199,6 +202,7 @@ bindsym $mod+c			exec --no-startup-id firefox
 bindsym $mod+b			bar mode toggle
 
 bindsym $mod+m			exec --no-startup-id "pgrep -x feishin >/dev/null || feishin"; workspace $ws9; [class="feishin"] focus
+bindsym $mod+o			exec --no-startup-id "pgrep -x obsidian >/dev/null || obsidian --password-store=gnome-libsecret"; workspace $ws7; [class="obsidian"] focus
 
 # #---Workspace Bindings---# #
 bindsym $mod+Tab		workspace back_and_forth
