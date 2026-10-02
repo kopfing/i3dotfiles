@@ -204,6 +204,9 @@ bindsym $mod+b			bar mode toggle
 bindsym $mod+m			exec --no-startup-id "pgrep -x feishin >/dev/null || feishin"; workspace $ws9; [class="feishin"] focus
 bindsym $mod+o			exec --no-startup-id "pgrep -x obsidian >/dev/null || obsidian --password-store=gnome-libsecret"; workspace $ws7; [class="obsidian"] focus
 
+bindsym $mod+Control+0  exec --no-startup-id "bash ~/.scripts/twomons.sh"; workspace 1; move workspace to output DP-0; workspace 3; move workspace to output DP-0; workspace 4; move workspace to output DP-0; workspace 5; move workspace to output DP-0; workspace 6; move workspace to output DVI-D-0; workspace 7; move workspace to output DVI-D-0; workspace 2; move workspace to output DP-0; workspace 9; move workspace to output DVI-D-0; workspace 10; move workspace to output DVI-D-0; workspace 8; move workspace to output DVI-D-0
+bindsym $mod+Control+2  exec --no-startup-id "bash ~/.scripts/bassmons.sh"; workspace 1; move workspace to output DP-0; workspace 3; move workspace to output DP-0; workspace 4; move workspace to output DP-0; workspace 5; move workspace to output DP-0; workspace 6; move workspace to output DVI-D-0; workspace 7; move workspace to output DVI-D-0; workspace 2; move workspace to output DP-0; workspace 9; move workspace to output DVI-D-0; workspace 10; move workspace to output DVI-D-0; workspace 8; move workspace to output DVI-D-0
+
 # #---Workspace Bindings---# #
 bindsym $mod+Tab		workspace back_and_forth
 bindsym $mod+apostrophe		split horizontal ;; exec $term
